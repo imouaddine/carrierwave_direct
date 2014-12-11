@@ -6,6 +6,9 @@ module CarrierWaveDirect
     def mount_uploader(column, uploader=nil, options={}, &block)
       super
 
+
+      uploader ||= const_get("#{column}_uploader".camelize)
+
       # Don't go further unless the class included CarrierWaveDirect::Uploader
       return unless uploader.ancestors.include?(CarrierWaveDirect::Uploader)
 
